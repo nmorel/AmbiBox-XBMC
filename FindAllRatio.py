@@ -5,8 +5,8 @@ media = Media.Media()
 
 ratios = dict()
 
-paths = ['E:\\', 'F:\\', 'G:\\', 'H:\\']
-#paths = ['F:\\']
+#paths = ['E:\\', 'F:\\', 'G:\\', 'H:\\']
+paths = ['F:\\']
 #paths = ['C:\\dev']
 for path in paths:
     for root, dirs, files in os.walk(path):
@@ -14,8 +14,8 @@ for path in paths:
             if name.endswith((".mkv", ".avi", ".mp4", ".m2ts", ".ts")):
                 fullPath = os.path.join(root, name)
                 ratio = media.getAspectRatio(fullPath)
-                videosByRatio = ratios.get(ratio, set())
-                videosByRatio.add(fullPath)
+                videosByRatio = ratios.get(ratio, list())
+                videosByRatio.append(fullPath)
                 ratios[ratio] = videosByRatio
 
 
