@@ -5,9 +5,9 @@ media = Media.Media()
 
 ratios = dict()
 
-#paths = ['E:\\', 'F:\\', 'G:\\', 'H:\\']
+paths = ['E:\\', 'F:\\', 'G:\\', 'H:\\']
 #paths = ['F:\\']
-paths = ['C:\\dev']
+#paths = ['C:\\dev']
 for path in paths:
     for root, dirs, files in os.walk(path):
         for name in files:
