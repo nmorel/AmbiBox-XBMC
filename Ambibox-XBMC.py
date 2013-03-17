@@ -1,5 +1,4 @@
 import xbmc
-import xbmcgui
 import Media
 import AmbiBox
 
@@ -21,7 +20,7 @@ class AmbiBoxPlayer(xbmc.Player):
                 ratio = ratioDictionary[ratio]
             else:
                 message = "Ratio inconnu : %s" % ratio
-                xbmc.executebuiltin('XBMC.Notification(AmbiBox, %s, 5000)' % message)
+                xbmc.executebuiltin('XBMC.Notification(AmbiBox, %s, 3000)' % message)
                 print message
                 # Using 16:9 as default profile
                 ratio = '16:9'
@@ -65,15 +64,15 @@ ratioDictionary = {
     '2.40:1': '2.40:1',
     '2.25:1': '2.25:1',
     '4:3': '4:3',
-    '3:2': '4:3',
+    '3:2': '3:2',
     '1.391': '4:3',
     '1.85:1': '1.85:1',
-    '1.895': '1.85:1',
     '1.727': '1.7',
     '1.739': '1.7',
     '1.731': '1.7',
     '1.733': '1.7',
     '1.659': '1.7',
+    '1.895': '2.0',
     '2.000': '2.0'
 }
 
