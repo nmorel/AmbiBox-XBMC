@@ -17,7 +17,17 @@ class AmbiBoxPlayer(xbmc.Player):
 
             # we retrieve the format of the playing video
             ratio = self.media.getAspectRatio(xbmc.Player().getPlayingFile())
+            if ratio in ratioDictionary:
+                ratio = ratioDictionary[ratio]
+            else:
+                message = "Ratio inconnu : %s" % ratio
+                xbmc.executebuiltin('XBMC.Notification(AmbiBox, %s, 5000)' % message)
+                print message
+                # Using 16:9 as default profile
+                ratio = '16:9'
+
             newProfile = profileFormat % ratio
+
             print "Setting AmbiBox profile to : " + newProfile
 
             self.ambibox.connect()
@@ -49,6 +59,23 @@ class AmbiBoxPlayer(xbmc.Player):
 
 player = AmbiBoxPlayer()
 profileFormat = "Adalight %s"
+ratioDictionary = {
+    '16:9': '16:9',
+    '2.35:1': '2.35:1',
+    '2.40:1': '2.40:1',
+    '2.25:1': '2.25:1',
+    '4:3': '4:3',
+    '3:2': '4:3',
+    '1.391': '4:3',
+    '1.85:1': '1.85:1',
+    '1.895': '1.85:1',
+    '1.727': '1.7',
+    '1.739': '1.7',
+    '1.731': '1.7',
+    '1.733': '1.7',
+    '1.659': '1.7',
+    '2.000': '2.0'
+}
 
 VIDEO = 0
 while 1:
