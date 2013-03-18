@@ -27,14 +27,18 @@
 # Modifications by Jerome Martinez
 #
 
-
+import os
 from ctypes import *
 
-try:
-    MediaInfoDLL_Handler = WinDLL(r"C:\\Program Files\\MediaInfo\\MediaInfo_i386.dll")
-except WindowsError:
-    MediaInfoDLL_Handler = WinDLL(r"C:\\Program Files\\MediaInfo\\MediaInfo.dll")
-MustUseAnsi = 0
+if os.name == "nt" or os.name == "dos" or os.name == "os2" or os.name == "ce":
+    try:
+        MediaInfoDLL_Handler = WinDLL(r"C:\\Program Files\\MediaInfo\\MediaInfo_i386.dll")
+    except WindowsError:
+        MediaInfoDLL_Handler = WinDLL(r"C:\\Program Files\\MediaInfo\\MediaInfo.dll")
+    MustUseAnsi = 0
+else:
+    MediaInfoDLL_Handler = CDLL("libmediainfo.so.0")
+    MustUseAnsi = 1
 
 
 # types --> C Python:

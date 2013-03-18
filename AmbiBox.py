@@ -64,10 +64,18 @@ class AmbiBox:
     def setProfile(self, p):
         cmd = 'setprofile:' + p + os.linesep
         self.connection.send(cmd)
-        print self.__readResult()
+        return self.__readResult()
 
     def getProfile(self):
         cmd = 'getprofile' + os.linesep
         self.connection.send(cmd)
         result = self.__readResult()
         return result[(result.index(':') + 1):len(result)]
+
+    def getProfiles(self):
+        cmd = 'getprofiles' + os.linesep
+        self.connection.send(cmd)
+        result = self.__readResult()
+        profiles = (result[(result.index(':') + 1):len(result)]).split(';')
+        profiles.remove('')
+        return profiles

@@ -36,7 +36,10 @@ class AmbiBoxPlayer(xbmc.Player):
             self.previousProfile = self.ambibox.getProfile()
 
             self.ambibox.lock()
-            self.ambibox.setProfile(newProfile)
+            result = self.ambibox.setProfile(newProfile)
+            if result == 'error':
+                message = "Profil inconnu : %s" % newProfile
+                xbmc.executebuiltin('XBMC.Notification(AmbiBox, %s, 3000)' % message)
             self.ambibox.turnOn()
             self.ambibox.disconnect()
 
